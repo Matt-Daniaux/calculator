@@ -80,8 +80,18 @@ const operatorBtn = [...btnAll].slice(10, 14);
 function operatorToDisplayNumber() {
     for (let i = 0; i < operatorBtn.length; i++) {
         operatorBtn[i].addEventListener('click', () => {
-            display.textContent = 0;
-            displayNumber[1] = operatorBtn[i].textContent;
+                
+
+                if (displayNumber[1] == 0) {
+                    display.textContent = 0;
+                    displayNumber[1] = operatorBtn[i].textContent;
+                } else {
+                    equal()
+                    displayNumber[1] = operatorBtn[i].textContent;
+                }
+
+
+
         })
     }
 }
@@ -92,8 +102,7 @@ function operatorToDisplayNumber() {
 const equalBtn = btnAll[14];
 
 function equal () {
-    equalBtn.addEventListener('click', () => {
-        displayNumber[2] = display.textContent;
+    displayNumber[2] = display.textContent;
         displayNumber[3] = operate(
                                     parseInt(displayNumber[0]),
                                     parseInt(displayNumber[2]),
@@ -103,8 +112,10 @@ function equal () {
         displayNumber[2] = 0;
         displayNumber[1] = 0;
         displayNumber[0] = displayNumber[3];
+}
 
-    })
+function equalButton() {
+    equalBtn.addEventListener('click', equal)
 }
 
 //Clear btn
@@ -118,8 +129,37 @@ function clear () {
 }
 
 
+//Delete Btn
+const deleteOneCharacterBtn = btnAll[16]
+
+function deleteLastCharacter () {
+    deleteOneCharacterBtn.addEventListener('click', () => {
+        let displayDelete = '';
+        let indexTwo = displayNumber[2] 
+
+        displayDelete = display.textContent.slice(0,-1)
+
+        if (indexTwo == 0) {
+            displayNumber[0] = displayDelete
+        } else {
+            displayNumber[2] = displayDelete
+        
+        }
+        
+        display.textContent = displayDelete;
+    })
+}
+
+
 addToDisplay()
 operatorToDisplayNumber()
-equal()
-clear()
 
+clear()
+deleteLastCharacter()
+
+equalButton()
+
+//to MYself
+//Round up long decimal 
+//Extra Credit 
+//CSS the shit out 

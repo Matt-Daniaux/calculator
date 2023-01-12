@@ -80,12 +80,13 @@ button {
     
 }
 
-#equal {
+.bigger-btn {
     width: 76%;
+}
+
+#equal {    
     font-size: 400%;
 }
 
-#clear {
-    width: 76%;
-}
+
 
