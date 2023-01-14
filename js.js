@@ -1,5 +1,23 @@
-//Basic function for further call 
+//Array of operation
+let displayNumber = [0,0,0,0];
 
+//Display zone
+const display = document.querySelector('.display');
+display.textContent = displayNumber[0];
+
+//Number btn
+const btnAll = document.querySelectorAll('.main-button');
+const btnNumber = [...btnAll].slice(0, 10);
+btnNumber[10] = btnAll[16]
+
+//btn...
+const operatorBtn = [...btnAll].slice(10, 14);
+const equalBtn = btnAll[14];
+const clearBtn = btnAll[15];
+const deleteOneCharacterBtn = btnAll[17]
+
+
+//Basic function for further call 
 const mathOperation = {
     add(a,b) {
         return a + b 
@@ -16,7 +34,6 @@ const mathOperation = {
 }
 
 //function operate
-
 function operate (a, b, operator) {
     if (operator === '+') {
         return mathOperation.add(a,b)
@@ -31,70 +48,58 @@ function operate (a, b, operator) {
     }
 }
 
-
-
-//Make the display work when click 
-let displayNumber = [0,0,0,0];
-
-const display = document.querySelector('.display');
-display.textContent = displayNumber[0];
-
-const btnAll = document.querySelectorAll('.main-button');
-const btnNumber = [...btnAll].slice(0, 10);
-btnNumber[10] = btnAll[16]
-
-
-//function that say if you tap that button it add that to display 
 //If equal noting just add number else do like clear 
-
+//Limit to one dot 
 function addToDisplay() {
     for (let i = 0; i < btnNumber.length; i++) {
         btnNumber[i].addEventListener('click', () => {
-            if(displayNumber[1] == 0) { 
-                btnAll[16].disabled = false;                                     //if..else to choose if it's first or second number of operation 
-                if (displayNumber[0] !== 0) {                                //Choose if add or concat number in chosen array index
-                    display.textContent += btnNumber[i].textContent;
-                    displayNumber[0] += btnNumber[i].textContent;
+            if (i !== null) {
+                if(displayNumber[1] == 0) { 
+                    btnAll[16].disabled = false;                                     //if..else to choose if it's first or second number of operation 
+                    if (displayNumber[0] !== 0) {                                //Choose if add or concat number in chosen array index
+                        display.textContent += btnNumber[i].textContent;
+                        displayNumber[0] += btnNumber[i].textContent;
 
-                        if (displayNumber[0].includes('.') === true) {      //disabled btn for decimal  
+                            if (displayNumber[0].includes('.') === true) {      //disabled btn for decimal  
+                                btnAll[16].disabled = true;
+                            }
+
+                    } else {
+                        display.textContent = btnNumber[i].textContent;
+                        displayNumber[0] = btnNumber[i].textContent;
+
+                        if (displayNumber[0].includes('.') === true) {       
+                            btnAll[16].disabled = true;
+                        }
+                    }
+
+                } else {
+                    btnAll[16].disabled = false;  
+                    if (displayNumber[2] !== 0) {
+                        btnAll[16].disabled = false                             
+
+                        display.textContent += btnNumber[i].textContent;
+                        displayNumber[2] += btnNumber[i].textContent;
+
+                        if (displayNumber[2].includes('.') === true) {
                             btnAll[16].disabled = true;
                         }
 
-                } else {
-                    display.textContent = btnNumber[i].textContent;
-                    displayNumber[0] = btnNumber[i].textContent;
+                    } else {
+                        display.textContent = btnNumber[i].textContent;
+                        displayNumber[2] = btnNumber[i].textContent;
 
-                    if (displayNumber[0].includes('.') === true) {       
-                        btnAll[16].disabled = true;
+                        if (displayNumber[2].includes('.') === true) {      
+                            btnAll[16].disabled = true;
+                        }
                     }
                 }
-
-            } else {
-                btnAll[16].disabled = false;  
-                if (displayNumber[2] !== 0) {
-                    btnAll[16].disabled = false                             
-
-                    display.textContent += btnNumber[i].textContent;
-                    displayNumber[2] += btnNumber[i].textContent;
-
-                    if (displayNumber[2].includes('.') === true) {
-                        btnAll[16].disabled = true;
-                    }
-
-                } else {
-                    display.textContent = btnNumber[i].textContent;
-                    displayNumber[2] = btnNumber[i].textContent;
-
-                    if (displayNumber[2].includes('.') === true) {      
-                        btnAll[16].disabled = true;
-                    }
-                }
-            }
-        }) 
+            } 
+        })
     } 
 };
 
-//Same with keyEvent 
+//Same as addToDisplay with keyEvent 
 function keyboardShortCutAddToDisplay () {
     document.addEventListener('keydown', e => {
         let i = '';
@@ -167,15 +172,7 @@ function keyboardShortCutAddToDisplay () {
     });
 };
 
-//function that say if you tap that button it add that to display 
-//If equal noting just add number else do like clear 
-
-
-
-
-//Function that add displayNumber[1] (operator)  & displayNumber[0] (number)
-const operatorBtn = [...btnAll].slice(10, 14);
-
+//Function that add displayNumber[1] (operator)  & displayNumber[0] (number) to (Array of operation)
 function operatorToDisplayNumber() {
     for (let i = 0; i < operatorBtn.length; i++) {
         operatorBtn[i].addEventListener('click', () => {
@@ -189,9 +186,8 @@ function operatorToDisplayNumber() {
         })
     }
 }
-//document.addEventListener('keydown', e => { 
-//    console.log(e)})
 
+//Same with key
 function operatorToDisplayNumberKeyShortCut() {
     document.addEventListener('keydown', e => { 
         if (e.key === '+') {
@@ -230,12 +226,7 @@ function operatorToDisplayNumberKeyShortCut() {
     })
 }
 
-
-
-
 //fct that transfers displayNumber[0] & [2] with fitting operator
-const equalBtn = btnAll[14];
-
 function equal () {
     if (displayNumber[1] == '/' && displayNumber[2] == 0) {
         display.textContent = 'Can\'t do';
@@ -255,34 +246,13 @@ function equal () {
         displayNumber[0] = displayNumber[3];
 }
 
-function equalButton() {
-    equalBtn.addEventListener('click', equal)
-}
-function equalKey() {
-    document.addEventListener('keydown', e => {
-        if(e.key === 'Enter') {
-            equal()
-        }
-    })
-}
-
-
-//Clear btn
-const clearBtn = btnAll[15];
-
+//fct for btn/click event 
 function clear () {
-    clearBtn.addEventListener('click', () => {
-        displayNumber = [0,0,0,0];
-        display.textContent = 0;
-    })
+    displayNumber = [0,0,0,0];
+    display.textContent = 0;
 }
-
-
-//Delete Btn
-const deleteOneCharacterBtn = btnAll[17]
 
 function deleteLastCharacter () {
-    deleteOneCharacterBtn.addEventListener('click', () => {
         let displayDelete = '';
         let indexTwo = displayNumber[2] 
 
@@ -294,32 +264,46 @@ function deleteLastCharacter () {
             displayNumber[2] = displayDelete
         
         }
-        
         display.textContent = displayDelete;
+}
+
+
+//btn...
+function equalButtonKey() {
+    equalBtn.addEventListener('click', equal)
+    document.addEventListener('keydown', e => {
+        if(e.key === '=') {equal()};
+    })
+}
+
+function clearButton () {
+    clearBtn.addEventListener('click', clear)
+}
+
+function deleteOneCharacterBtnKey() {
+    deleteOneCharacterBtn.addEventListener('click', deleteLastCharacter)
+    document.addEventListener('keydown', e => {
+        if(e.key === 'Backspace') {deleteLastCharacter()}
     })
 }
 
 
 
-
+//Whole calculator
 function calculator () {
     addToDisplay()
     keyboardShortCutAddToDisplay()
+    
+    operatorToDisplayNumber()
     operatorToDisplayNumberKeyShortCut()
 
-    operatorToDisplayNumber()
-
-    clear()
-    deleteLastCharacter()
-
-    equalButton()
-    equalKey()
+    clearButton()
+    deleteOneCharacterBtnKey()
+    equalButtonKey()
 }
 
 calculator()
 
 //to MYself
-
-
-//CSS the shit out 
-//Optimise the shit out 
+//CSS ++ 
+//Optimize 
