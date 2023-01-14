@@ -1,33 +1,31 @@
 //Basic function for further call 
 
-function add (a,b) {
-    return a + b 
+const mathOperation = {
+    add(a,b) {
+        return a + b 
+    },
+    subtract(a,b) {
+        return a - b 
+    },
+    multiply(a,b) {
+        return a * b 
+    },
+    divide(a,b) {
+        return a / b 
+    }
 }
-
-function subtract (a,b) {
-    return a - b 
-}
-
-function multiply (a,b) {
-    return a * b 
-}
-
-function divide (a,b) {
-    return a / b 
-}
-
 
 //function operate
 
 function operate (a, b, operator) {
     if (operator === '+') {
-        return add(a,b)
+        return mathOperation.add(a,b)
     } else if (operator === '-') {
-        return subtract(a,b)
+        return mathOperation.subtract(a,b)
     }else if (operator === 'x') {
-        return multiply(a,b)
+        return mathOperation.multiply(a,b)
     }else if (operator === '/') {
-        return divide(a,b)
+        return mathOperation.divide(a,b)
     } else {
         return a
     }
@@ -304,24 +302,24 @@ function deleteLastCharacter () {
 
 
 
+function calculator () {
+    addToDisplay()
+    keyboardShortCutAddToDisplay()
+    operatorToDisplayNumberKeyShortCut()
 
-addToDisplay()
-keyboardShortCutAddToDisplay()
-operatorToDisplayNumberKeyShortCut()
+    operatorToDisplayNumber()
 
+    clear()
+    deleteLastCharacter()
 
-operatorToDisplayNumber()
+    equalButton()
+    equalKey()
+}
 
-
-
-clear()
-deleteLastCharacter()
-
-equalButton()
-equalKey()
+calculator()
 
 //to MYself
 
 
 //CSS the shit out 
-//optimise the shit out 
+//Optimise the shit out 
