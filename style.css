@@ -1,7 +1,7 @@
 * {
-    border: 0px solid rgb(70, 209, 107);
+    border: 0px solid rgb(248, 203, 46);
     box-sizing: border-box;
-    background: rgb(18, 23, 2);
+    background-color: rgb(49, 53, 82);
     font-family: 'optima', sans-serif;
     color: aliceblue;
 }
@@ -16,16 +16,16 @@ body {
 
 .display,
 .main-container {
-    margin: 0% 15%;
+    margin: 7vh 15% 0vh;
     height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .display {
-    margin-top: 5%;
-    height: 15%;
-    background: rgb(173, 122, 3);
+    margin-top: ;
+    min-height: 15vh;
+    background: rgb(184, 64, 94);
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -33,6 +33,10 @@ body {
 
     font-size: 150%;
     font-weight: 600;
+
+    border: 0px solid rgb(33, 130, 100);
+    box-shadow: 0px 0px 0px 0px rgb(238, 230, 206);
+    
 }
 
 .main-container {
@@ -43,15 +47,22 @@ body {
 
 .digit-container, 
 .operator-container{
-    height: 80%;
+    height: 75vh;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    
     align-content: flex-start;
     flex-wrap: wrap;
-    column-gap: 5%;
-    row-gap: 3%;
+    column-gap: 25px;
+    row-gap: 25px;
     width: 40%;
+}
+
+.digit-container {
+    justify-content: center;
+}
+.operator-container {
+    justify-content: center;
 }
 
 
@@ -59,16 +70,17 @@ body {
 button {
     margin: 0px;
     padding: 0px;
+    box-shadow: 0px 0px 4px 2px rgb(212, 187, 112);
 }
 
 .main-button {
-    width: 35%;
+    width: 130px;
     height: 0;
-    padding-top: 15%;
-    padding-bottom: 15%;
+    padding-top: 65px;
+    padding-bottom: 65px;
     border-radius: 20px;
     margin-bottom: 1%;
-    background: rgba(178, 166, 0, 0.477);
+    background: rgb(33, 130, 100);
 
     font-size: 250%;
     font-weight: 600;
@@ -76,12 +88,14 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid rgba(229, 255, 0, 0.672);
+    border: 0px solid rgb(238, 230, 206);
     
 }
 
 .bigger-btn {
-    width: 76%;
+    width: 285px;
+    order: 2;
+
 }
 
 #equal {    
